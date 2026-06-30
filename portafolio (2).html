@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandra Neida — Diseño Gráfico</title>
+<meta name="description" content="Diseñadora gráfica senior. Hago visible lo que otros no logran explicar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #15131c;
+    --surface: #1d1925;
+    --surface-2: #211d29;
+    --line: #332c42;
+    --line-soft: #2a2433;
+    --text: #f1ece1;
+    --text-soft: #cfc8de;
+    --text-dim: #a79fb5;
+    --text-faint: #6b637a;
+    --rust: #c1612f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 32px;}
+  @media(max-width:680px){.wrap{padding:0 22px;}}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.01em;}
+  .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);
+  }
+  .label-dim{color:var(--text-faint);}
+  ::selection{background:var(--rust);color:var(--bg);}
+  a:focus-visible, button:focus-visible{outline:1.5px solid var(--rust);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important;transition:none !important;} }
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 32px;
+    background:linear-gradient(to bottom, rgba(21,19,28,.95), rgba(21,19,28,0));
+    backdrop-filter:blur(6px);
+  }
+  nav .logo{font-family:'Fraunces',serif;font-weight:500;font-size:17px;}
+  nav .links{display:flex;gap:26px;font-size:13.5px;color:var(--text-dim);align-items:center;}
+  nav .links a:hover{color:var(--text);}
+  nav .links a.cta{
+    color:var(--bg);background:var(--rust);
+    padding:8px 16px;border-radius:100px;font-weight:500;font-size:13px;
+  }
+  @media(max-width:760px){ nav .links span.hide-mobile{display:none;} }
+
+  /* HERO */
+  header.hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-top:90px;
+  }
+  header.hero h1{
+    font-size:clamp(38px, 6.4vw, 64px);
+    line-height:1.15;
+    max-width:680px;
+    font-weight:400;
+  }
+  header.hero .eyebrow{display:block;margin-bottom:36px;}
+  .scroll-hint{
+    margin-top:60px;font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);
+  }
+
+  /* GENERIC EDITORIAL BLOCK */
+  .block{padding:96px 0;}
+  @media(max-width:680px){.block{padding:64px 0;}}
+  .block-intro{font-size:clamp(20px,2.6vw,26px);line-height:1.6;max-width:620px;color:var(--text-soft);font-family:'Fraunces',serif;font-weight:300;}
+  .block .label{display:block;margin-bottom:22px;}
+  .block-border{border-top:1px solid var(--line);}
+
+  .img-block{
+    height:340px;background:var(--surface-2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    color:var(--text-faint);text-transform:uppercase;margin-top:48px;
+  }
+  @media(max-width:680px){.img-block{height:220px;}}
+
+  /* CASE STUDIES */
+  .case{padding:96px 0;border-top:1px solid var(--line);}
+  @media(max-width:680px){.case{padding:64px 0;}}
+  .case h2{font-size:clamp(28px,4vw,42px);line-height:1.2;max-width:600px;margin:18px 0 0;}
+  .case-img{
+    height:300px;background:var(--surface-2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    color:var(--text-faint);text-transform:uppercase;margin:40px 0;
+  }
+  @media(max-width:680px){.case-img{height:200px;}}
+  .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-bottom:8px;}
+  @media(max-width:680px){.case-grid{grid-template-columns:1fr;gap:24px;}}
+  .case-grid .h{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--text-faint);text-transform:uppercase;margin-bottom:10px;display:block;}
+  .case-grid p{font-size:15px;line-height:1.65;color:var(--text-soft);margin:0;}
+  .case-quote{
+    border-top:1px solid var(--line-soft);margin-top:36px;padding-top:28px;
+    font-family:'Fraunces',serif;font-style:italic;font-size:19px;line-height:1.6;
+    color:var(--text);max-width:600px;
+  }
+
+  /* AI SECTION */
+  .ai-section{padding:96px 0;border-top:1px solid var(--line);}
+  .ai-scene{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:4px;
+    padding:40px;margin-top:40px;
+  }
+  @media(max-width:680px){.ai-scene{padding:26px;}}
+  .ai-scene p{font-size:16px;line-height:1.75;color:var(--text-soft);max-width:600px;}
+  .ai-scene p + p{margin-top:16px;}
+  .ai-scene .decision{
+    margin-top:24px;padding-top:20px;border-top:1px solid var(--line-soft);
+    font-size:14px;color:var(--rust);font-family:'JetBrains Mono',monospace;letter-spacing:.02em;
+  }
+
+  /* INTERESTS */
+  .interests-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:44px;}
+  @media(max-width:680px){.interests-grid{grid-template-columns:1fr 1fr;}}
+  .interest{background:var(--bg);padding:30px 22px;}
+  .interest .label{margin-bottom:10px;}
+  .interest p{font-size:13.5px;color:var(--text-dim);margin:0;}
+
+  /* TOOLS as methodology */
+  .method-row{
+    display:grid;grid-template-columns:160px 1fr;gap:28px;
+    padding:22px 0;border-top:1px solid var(--line-soft);
+  }
+  @media(max-width:680px){.method-row{grid-template-columns:1fr;gap:8px;}}
+  .method-row .cat{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--text-faint);text-transform:uppercase;}
+  .method-row p{font-size:14.5px;color:var(--text-soft);margin:0;line-height:1.6;}
+  .method-row p b{color:var(--text);font-weight:500;}
+
+  /* CONTACT */
+  .contact{
+    border:1px solid var(--line);
+    padding:80px 48px;
+    text-align:center;
+  }
+  @media(max-width:680px){.contact{padding:52px 26px;}}
+  .contact h2{font-size:clamp(28px,4.6vw,44px);margin-bottom:22px;line-height:1.25;max-width:600px;margin-left:auto;margin-right:auto;}
+  .contact .cta{
+    display:inline-block;background:var(--rust);color:#15131c;
+    padding:15px 32px;font-weight:500;font-size:14.5px;margin-top:8px;
+  }
+  .contact .socials{margin-top:34px;display:flex;gap:24px;justify-content:center;font-size:13px;color:var(--text-dim);}
+  .contact .socials a:hover{color:var(--text);}
+
+  footer{padding:36px 0;text-align:center;color:var(--text-faint);font-size:12.5px;border-top:1px solid var(--line-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Alexandra Neida</div>
+  <div class="links">
+    <a href="#work" class="hide-mobile">Trabajo</a>
+    <a href="#ai" class="hide-mobile">IA</a>
+    <a href="#about" class="hide-mobile">Sobre mí</a>
+    <a href="#contact" class="cta">Contactar</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="label eyebrow">Diseñadora gráfica — Santiago, Chile</span>
+    <h1>Hago visible lo que otros no logran explicar.</h1>
+    <div class="scroll-hint">↓ sigue bajando</div>
+  </div>
+</header>
+
+<section class="block block-border reveal" id="about">
+  <div class="wrap">
+    <span class="label">Cómo veo el mundo</span>
+    <p class="block-intro">Desde chica necesitaba saber el porqué de las cosas, no solo el cómo. Esa curiosidad terminó siendo mi forma de diseñar: antes de dibujar una línea, quiero entender qué problema real estoy resolviendo.</p>
+    <div class="img-block">Fotografía / mockup grande</div>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wrap">
+    <span class="label">Por qué diseño</span>
+    <p class="block-intro">Disfruto el momento en que algo confuso se vuelve obvio — un catálogo que nadie entendía, una marca que se sentía distinta en cada sucursal, una entrega que se sentía a trámite. Ahí es donde más me entusiasma trabajar: no en la pieza bonita, sino en el momento exacto en que algo deja de ser un problema.</p>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="block reveal" style="padding-bottom:0;">
+      <span class="label">Trabajo seleccionado</span>
+    </div>
+  </div>
+
+  <div class="case reveal">
+    <div class="wrap">
+      <span class="label label-dim">Caso 01 — Sistema de catálogos</span>
+      <h2>La información estaba repartida en 80 fichas distintas. La ordené yo, con ayuda de IA, equipo por equipo.</h2>
+      <div class="case-img">Fotografía del catálogo impreso</div>
+      <div class="case-grid">
+        <div>
+          <span class="h">El problema</span>
+          <p>No existía un catálogo real de ventas — solo material básico — y la información técnica vivía dispersa entre fichas, sin nadie a cargo de centralizarla.</p>
+        </div>
+        <div>
+          <span class="h">Lo que hice</span>
+          <p>Entrené un agente con las fichas técnicas existentes y construí, validé y corregí con cada ejecutivo comercial, equipo por equipo, hasta tener un sistema adaptable a cada canal de venta.</p>
+        </div>
+      </div>
+      <p class="case-quote">"Hoy va por su cuarta reimpresión, y los equipos comerciales lo piden antes de cada visita a cliente."</p>
+    </div>
+  </div>
+
+  <div class="case reveal">
+    <div class="wrap">
+      <span class="label label-dim">Caso 02 — Lineamientos de marca</span>
+      <h2>Nadie me pidió ordenar la marca. Lo hice antes de que se volviera obligación.</h2>
+      <div class="case-img">Fotografía del sistema de marca</div>
+      <div class="case-grid">
+        <div>
+          <span class="h">El problema</span>
+          <p>Manuales desactualizados, sin estándar entre países, mientras la empresa expandía operaciones a Perú y Colombia.</p>
+        </div>
+        <div>
+          <span class="h">Lo que hice</span>
+          <p>Unifiqué todo el material histórico en un sistema de lineamientos con manuales de apoyo, centralizado en una plataforma con recursos descargables para toda la organización.</p>
+        </div>
+      </div>
+      <p class="case-quote">"Hoy es el lugar al que la organización va antes de generar cualquier pieza de marca."</p>
+    </div>
+  </div>
+
+  <div class="case reveal">
+    <div class="wrap">
+      <span class="label label-dim">Caso 03 — Rito de entrega</span>
+      <h2>Una compra industrial se sentía a trámite. Le diseñamos un momento.</h2>
+      <div class="case-img">Fotografía del prototipo de entrega</div>
+      <div class="case-grid">
+        <div>
+          <span class="h">El problema</span>
+          <p>La entrega de un equipo de alto valor se limitaba a una carpeta de papeles — funcional, sin ninguna experiencia memorable.</p>
+        </div>
+        <div>
+          <span class="h">Lo que hice</span>
+          <p>Propuse y diseñé libros especializados por tipo de equipo, una caja a medida y el detalle de cada elemento, con códigos QR como puente a contenido adicional.</p>
+        </div>
+      </div>
+      <p class="case-quote">"El prototipo se entregó hace pocos días. Quedó hermoso."</p>
+    </div>
+  </div>
+
+  <div class="case reveal">
+    <div class="wrap">
+      <span class="label label-dim">Caso 04 — Comunicación digital y publicidad exterior</span>
+      <h2>El mismo mensaje, dicho distinto según el soporte.</h2>
+      <div class="case-img">Fotografía de publicidad exterior</div>
+      <div class="case-grid">
+        <div>
+          <span class="h">El alcance</span>
+          <p>Contenido para redes sociales y piezas de publicidad exterior — camineros, avisos en revistas, publicidad en aeropuerto.</p>
+        </div>
+        <div>
+          <span class="h">El criterio</span>
+          <p>Adaptar el mismo mensaje a cada soporte: lo digital pide inmediatez, el gran formato pide legibilidad a distancia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ai-section reveal" id="ai">
+  <div class="wrap">
+    <span class="label">Cómo pienso con IA</span>
+    <p class="block-intro">No uso IA para que decida por mí. La uso para llegar más rápido al punto en que puedo decidir yo.</p>
+    <div class="ai-scene">
+      <p>Necesitaba estructurar la información de más de 80 equipos industriales distintos y nadie tenía tiempo para dármela ordenada. Así que entrené un agente con las fichas técnicas oficiales, le pedí que no inventara nada fuera de esa fuente, y empecé a construir las descripciones con él: una base, que luego ajustaba en conversación con cada ejecutivo comercial.</p>
+      <p>La IA me dio velocidad para explorar y corregir. Pero qué información destacar primero, qué cambiar cuando un ejecutivo me decía "este equipo también se usa en otro rubro", o cómo categorizar todo para que escalara — eso lo decidí yo, conversación por conversación.</p>
+      <div class="decision">→ La herramienta acelera. El criterio sigue siendo mío.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block block-border reveal">
+  <div class="wrap">
+    <span class="label">Fuera del trabajo</span>
+    <div class="interests-grid">
+      <div class="interest"><span class="label label-dim">Leer</span><p>Soy lectora — y eso influye hasta en decisiones de diseño, como el tamaño de un catálogo.</p></div>
+      <div class="interest"><span class="label label-dim">Música</span><p>Siempre con algo de fondo mientras trabajo o diseño.</p></div>
+      <div class="interest"><span class="label label-dim">Dibujar</span><p>Donde el criterio visual empezó, antes de cualquier programa.</p></div>
+      <div class="interest"><span class="label label-dim">Cocinar</span><p>Otra forma de seguir un proceso hasta el resultado.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wrap">
+    <span class="label">Cómo trabajo</span>
+    <div class="method-row">
+      <span class="cat">Adobe + IA</span>
+      <p>Illustrator, Photoshop e InDesign para resolver; agentes de IA y herramientas como Magnific cuando necesito investigar rápido o explorar variaciones antes de decidir.</p>
+    </div>
+    <div class="method-row">
+      <span class="cat">Marketing</span>
+      <p>Zoho para email marketing, y aprendiendo Google Ads por curiosidad — quiero entender ese lado del negocio, no solo el visual.</p>
+    </div>
+    <div class="method-row">
+      <span class="cat">Gestión</span>
+      <p>PowerPoint y Google Slides, según con quién colabore — la herramienta se adapta al equipo, no al revés.</p>
+    </div>
+    <div class="method-row">
+      <span class="cat">El valor real</span>
+      <p><b>Ninguna herramienta diseña por mí.</b> Las uso para llegar más rápido a la decisión — el criterio de qué hacer con lo que encuentro sigue siendo mío.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Si llegaste hasta aquí, probablemente ya sabes si quieres conversar conmigo.</h2>
+      <a class="cta" href="mailto:a.d.neida.orellana@gmail.com">Escribir un correo</a>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/alexandra-neida-0246ba20b/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Alexandra Neida — Diseño Gráfico
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, {threshold:0.12});
+  reveals.forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
